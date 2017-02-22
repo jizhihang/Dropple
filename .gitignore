@@ -1,24 +1,32 @@
-*.class
-*.log
+# Prerequisites
+*.d
 
-# sbt specific
-.cache
-.history
-.lib/
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
 
-# Scala-IDE specific
-.scala_dependencies
-.worksheet
+# Precompiled Headers
+*.gch
+*.pch
 
-# ENSIME specific
-.ensime_cache/
-.ensime
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
 
-# IDE
-.idea
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
