@@ -28,5 +28,9 @@
 
 # Executables
 *.exe
+*.nexe
+*.pexe
 *.out
 *.app
+
+build

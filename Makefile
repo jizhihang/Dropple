@@ -1,15 +1,29 @@
-SHELL=/bin/bash
+CXX := g++
 
-install:
-	@echo "*** Installing project dependencies. ***"
-	@echo
+SRCDIR := src
+BUILDDIR := build
+TARGET := bin/nexe
 
-	./install.sh
+SRCEXT := cc
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+CFLAGS := -g -std=c++11
+LIB := -L mlpack
+INC := -I mlpack/armadillo/include
 
-	@echo "Done"
+$(TARGET): $(OBJECTS)
+	@echo "Linking...";
+	@echo "$(CXX) $^ -o $(TARGET) $(LIB)"; $(CXX) $^ -o $(TARGET) $(LIB)
 
-test:
-	source ~/.virtualenv/Dropple/bin/activate && PYTHONPATH=$(PYTHONPATH):. python -m unittest discover --pattern=*test.py -v
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(BUILDDIR)
+	@echo "mkdir -p $(shell dirname $@)"
+	@mkdir -p $(shell dirname $@)
+
+	@echo "$(CXX) $(CFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	find . -name '*.pyc' -delete
+	@echo "Cleaning..."; 
+	@echo "$(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
+
+.PHONY: clean dropple
